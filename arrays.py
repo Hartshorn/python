@@ -12,9 +12,9 @@ def draw_world(w):
         print("|", end="")
         for x in range(width):
             if w[(x, y)][0]:
-                print("M", end="")
+                print("\x1b[31mM\x1b[0m", end="")
             elif w[(x, y)][1]:
-                print("*", end="")
+                print("\x1b[32m*\x1b[0m", end="")
             else:
                 print(" ", end="")
         print("|\n", end="")
@@ -96,7 +96,7 @@ def mutate_genes(genes):
     total = sum(genes)
     index = genes.index(largest)
 
-    genes[index] = (genes[index] + total)
+    genes[index] = (genes[index] + total) % 10
 
     return genes
 
@@ -147,8 +147,8 @@ def main():
         num = input('Days:')
         day_count += int(num)
         for i in range(int(num)):
-            if i % 1000 == 0:
-                print('*')
+            if i % 1000 == 0 and i != 0:
+                print('.:{}:.'.format(i))
             simulate_day()
             
         print("Days: {} Years: {}".format(day_count, int(day_count / 365)))
