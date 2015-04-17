@@ -1,10 +1,8 @@
 from random import randint
 
 world = {}
-width = 65
-height = 26
-plt_nrg = 80
-rep_nrg = 200
+width, height = 100, 30
+plt_nrg, rep_nrg = 80, 200
 
 
 def draw_world(w):
@@ -70,10 +68,13 @@ def move_animal(key):
     world[key][0] = False
 
 
+def check_for_neighbors(key):
+
+
 def turn_animal(key):
     
     # Add logic to decide how to turn
-    world[key][3] = (world[key][3] + 1) % 8
+    world[key][3] = (world[key][3] + 1) % 10
 
 
 def eat_animal(key):
@@ -96,7 +97,7 @@ def mutate_genes(genes):
     total = sum(genes)
     index = genes.index(largest)
 
-    genes[index] = (genes[index] + total) % 10
+    genes[index] = genes[index] + total % largest
 
     return genes
 
